@@ -30,16 +30,12 @@ import pylab as plt
 import matplotlib as mpl
 #from scipy.optimize import leastsq
 #import scipy.special
-<<<<<<< HEAD
 #np.set_printoptions(threshold=np.nan)
-=======
-np.set_printoptions(threshold=np.nan)
->>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
 import multiprocessing
 from joblib import Parallel, delayed
 from collections import Counter
 
-import PIL # Python Image Library (for opening PNG, etc.)    
+import PIL # Python Image Library (for opening PNG, etc.)
 
 from .. import tools
 from ..Data import *
@@ -48,65 +44,60 @@ import time
 
 
 
-   
-    
-# Data2DScattering        
-################################################################################    
+
+
+# Data2DScattering
+################################################################################
 class Data2DScattering(Data2D):
     '''Represents the data from a 2D (area) detector in a scattering measurement.'''
+    maxmin_array = np.array([])
 
 
-    
     def __init__(self, infile=None, format='auto', calibration=None, mask=None, name=None, **kwargs):
         '''Creates a new Data2D object, which stores a scattering area detector
         image.'''
-        
+
         super(Data2DScattering, self).__init__(infile=None, **kwargs)
-        
+
         self.set_z_display([None, None, 'gamma', 0.3])
-        
+
         self.calibration = calibration
         self.mask = mask
-        
+
         self.detector_data = None # Detector-specific object
         self.data = None # 2D data
         self.measure_time = 0.0
-<<<<<<< HEAD
-        self.maxmin_array = np.array([])
-=======
-        self.maxmin_array =  None
->>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
-        
+
         if name is not None:
             self.name = name
         elif infile is not None:
             if 'full_name' in kwargs and kwargs['full_name']:
                 self.name = tools.Filename(infile).get_filename()
             else:
-                self.name = tools.Filename(infile).get_filebase()            
-                
+                self.name = tools.Filename(infile).get_filebase()
+
         if infile is not None:
             self.load(infile, format=format)
-        
+
 
     # Data loading
     ########################################
 
     def load(self, infile, format='auto', **kwargs):
         '''Loads data from the specified file.'''
-        
+
         if format=='eiger' or infile[-10:]=='_master.h5':
             self.load_eiger(infile, **kwargs)
-            
+
         elif format=='hdf5' or infile[-3:]=='.h5' or infile[-4:]=='.hd5':
             self.load_hdf5(infile)
-            
+
         elif format=='tiff' or infile[-5:]=='.tiff' or infile[-4:]=='.tif':
             self.load_tiff(infile)
-            
+
         elif format=='BrukerASCII' or infile[-6:]=='.ascii' or infile[-4:]=='.dat':
             self.load_BrukerASCII(infile)
-            
+
         else:
             super(Data2DScattering, self).load(infile=infile, format=format, **kwargs)
 
@@ -114,96 +105,96 @@ class Data2DScattering(Data2D):
         # Masking is now applied in the Processor's load method
         #if self.mask is not None:
             #self.data *= self.mask.data
-            
 
-        
-        
+
+
+
     def load_tiff(self, infile):
-        
+
         img = PIL.Image.open(infile).convert('I') # 'I' : 32-bit integer pixels
         self.data = np.copy( np.asarray(img) )
         del img
-        
 
-                
-                
+
+
+
     # Coordinate methods
     ########################################
-                    
+
     def get_origin(self):
-        
+
         x0 = self.calibration.x0
         y0 = self.calibration.y0
-        
+
         return x0, y0
 
-        
+
     def _xy_axes(self):
         # TODO: test, and integrate if it makes sense
-        
+
         dim_y,dim_x = self.data.shape
-        
+
         x_axis = (np.arange(dim_x) - self.calibration.x0)*self.x_scale
         y_axis = (np.arange(dim_y) - self.calibration.y0)*self.y_scale
-        
+
         return x_axis, y_axis
-        
-        
+
+
     # Data modification
     ########################################
-        
+
     def threshold_pixels(self, threshold, new_value=0.0):
-        
+
         self.data[self.data>threshold] = new_value
-        
-        
+
+
     def crop(self, size, shift_crop_up=0.0):
-        '''Crop the data, centered about the q-origin. I.e. this throws away 
+        '''Crop the data, centered about the q-origin. I.e. this throws away
         some of the high-q information. The size specifies the size of the new
         image (as a fraction of the original full image width).
-        
+
         shift_crop_up forces the crop to be off-center in the vertical (e.g. a
         value of 1.0 will shift it up so the q-origin is at the bottom of the
         image, which is nice for GISAXS).'''
-        
-        
+
+
         height, width = self.data.shape
         #self.data = self.data[ 0:height, 0:width ] # All the data
-        
+
         x0, y0 = self.get_origin()
         xi = max( int(x0 - size*width/2), 0 )
         xf = min( int(x0 + size*width/2), width )
         yi = max( int(y0 - size*height*(0.5+0.5*shift_crop_up) ), 0 )
         yf = min( int(y0 + size*height*(0.5-0.5*shift_crop_up) ), height )
-        
-        
+
+
         self.data = self.data[ yi:yf, xi:xf ]
-        
-        
+
+
     def dezinger(self, sigma=3, tol=100, mode='median', mask=True, fill=False):
         # NOTE: This could probably be improved.
-        
+
         if mode=='median':
             avg = ndimage.filters.median_filter(self.data, size=(sigma,sigma))
             variation = ndimage.filters.maximum_filter(avg, size=(sigma,sigma)) - ndimage.filters.minimum_filter(avg, size=(sigma,sigma))
             variation = np.where(variation > 1, variation, 1)
             idx = np.where( (self.data-avg)/variation > tol )
-            
+
         elif mode=='gauss':
             # sigma=3, tol=1e5
             avg = ndimage.filters.gaussian_filter( self.data, sigma )
             local = avg - self.data/np.square(sigma)
-            
+
             #dy, dx = np.gradient(self.data)
             #var = np.sqrt( np.square(dx) + np.square(dy) )
-            
+
             idx = np.where( (self.data > avg) & (self.data > local) & (self.data-avg > tol)  )
-        
-        
+
+
         #self.data[idx] = 0
         if fill:
             self.data[idx] = avg[idx]
-            
+
         if mask:
             self.mask.data[idx] = 0
 
@@ -214,15 +205,15 @@ class Data2DScattering(Data2D):
         '''Returns a 1D curve that is a circular average of the 2D data. The
         data is average over 'chi', so that the resulting curve is as a function
         of q.
-        
+
         'bins_relative' controls the binning (q-spacing in data).
             1.0 means the q-spacing is (approximately) a single pixel
             2.0 means there are twice as many bins (spacing is half a pixel)
             0.1 means there are one-tenth the number of bins (i.e. each data point is 10 pixels)
-            
+
         'error' sets whether or not error-bars are calculated.
         '''
-        
+
         # This version uses numpy.histogram instead of converting the binning
         # into an equivalent integer list (and then using numpy.bincount).
         # This code is slightly slower (30-40% longer to run. However, this
@@ -236,10 +227,10 @@ class Data2DScattering(Data2D):
             mask = np.ones(self.data.shape)
         else:
             mask = self.mask.data
-            
+
         # .ravel() is used to convert the 2D grids into 1D arrays.
         # This is not strictly necessary, but improves speed somewhat.
-        
+
         data = self.data.ravel()
         #print('data raveled', data)
         pixel_list = np.where(mask.ravel()==1) # Non-masked pixels
@@ -269,41 +260,41 @@ class Data2DScattering(Data2D):
 
         if error:
             # TODO: Include error calculations
-            
+
             x_vals, rbins = np.histogram( Q[pixel_list], bins=bins, range=x_range, weights=Q[pixel_list] )
-            
+
             # Create array of the average values (mu), in the original array layout
             locations = np.digitize( Q[pixel_list], bins=rbins, right=True) # Mark the bin IDs in the original array layout
             mu = (x_vals/num_per_bin)[locations-1]
-            
+
             weights = np.square(Q[pixel_list] - mu)
-            
+
             x_err, rbins = np.histogram( Q[pixel_list], bins=bins, range=x_range, weights=weights )
             x_err = np.sqrt( x_err[idx]/num_per_bin[idx] )
             x_err[0] = dq/2 # np.digitize includes all the values less than the minimum bin into the first element
-            
+
             x_vals = x_vals[idx]/num_per_bin[idx]
-            
+
             I_vals, rbins = np.histogram( Q[pixel_list], bins=bins, range=x_range, weights=data[pixel_list] )
             I_err_shot = np.sqrt(I_vals)[idx]/num_per_bin[idx]
-            
+
             mu = (I_vals/num_per_bin)[locations-1]
             weights = np.square(data[pixel_list] - mu)
             I_err_std, rbins = np.histogram( Q[pixel_list], bins=bins, range=x_range, weights=weights )
             I_err_std = np.sqrt( I_err_std[idx]/num_per_bin[idx] )
-                
+
             y_err = np.sqrt( np.square(I_err_shot) + np.square(I_err_std) )
             I_vals = I_vals[idx]/num_per_bin[idx]
-            
+
             line = DataLine( x=x_vals, y=I_vals, x_err=x_err, y_err=y_err, x_label='q', y_label='I(q)', x_rlabel='$q \, (\AA^{-1})$', y_rlabel=r'$I(q) \, (\mathrm{counts/pixel})$' )
-            
-            
+
+
         else:
             x_vals, rbins = np.histogram( Q[pixel_list], bins=bins, range=x_range, weights=Q[pixel_list] )
             x_vals = x_vals[idx]/num_per_bin[idx]
             I_vals, rbins = np.histogram( Q[pixel_list], bins=bins, range=x_range, weights=data[pixel_list] )
             I_vals = I_vals[idx]/num_per_bin[idx]
-            
+
             line = DataLine( x=x_vals, y=I_vals, x_label='q', y_label='I(q)', x_rlabel='$q \, (\AA^{-1})$', y_rlabel=r'$I(q) \, (\mathrm{counts/pixel})$' )
 
         #print(time.clock() - start)
@@ -312,10 +303,6 @@ class Data2DScattering(Data2D):
 
     def circular_average_q_bin_parallel(self, bins_relative=1.0, error=False, **kwargs):
         num_cores = multiprocessing.cpu_count()
-<<<<<<< HEAD
-=======
-        self.maxmin_array = np.array(num_cores*2)
->>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
 
         data = self.data.ravel()
 
@@ -324,28 +311,21 @@ class Data2DScattering(Data2D):
         qmap_split = np.array_split(self.calibration.q_map(), num_cores)
         dq = self.calibration.get_q_per_pixel()
 
-<<<<<<< HEAD
         count_pixels = Parallel(n_jobs=num_cores)(delayed(self.analyze)(data_chunk = data_split[i], mask_chunk = mask_split[i], q_chunk = qmap_split[i]) for i in range(len(data_split)))
 
-        print('array', self.maxmin_array)
-=======
-        count_pixels = Parallel(n_jobs=num_cores)(delayed(self.analyze)(data_chunk = i, mask_chunk = j, q_chunk = q) for i in data_split for j in mask_split for q in qmap_split)
-
->>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
-        max = np.max(self.maxmin_array)
-        min = np.min(self.maxmin_array)
+        np.append(Data2DScattering.maxmin_array, "test")
+        print('array', Data2DScattering.maxmin_array)
+        
+        max = np.max(Data2DScattering.maxmin_array)
+        min = np.min(Data2DScattering.maxmin_array)
         x_range = [min, max]
         bins = int(bins_relative * abs(max-min) / dq)
-<<<<<<< HEAD
         print(bins)
-=======
->>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
         #combined_dicts = Counter({})
 
         #for dictionary in count_dict:
             #combined_dicts += dictionary
 
-<<<<<<< HEAD
         #pixel_list = []
 
        # for p_list in count_pixels:
@@ -353,17 +333,7 @@ class Data2DScattering(Data2D):
 
         Q = self.calibration.q_map().ravel()
 
-        num_per_bin, rbins = np.histogram(Q[count_pixels[0]], bins=bins, range=x_range)
-=======
-        pixel_list = []
-
-        for p_list in count_pixels:
-            pixel_list += [p_list]
-
-        Q = self.calibration.q_map().ravel()
-
-        num_per_bin, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range)
->>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
+        num_per_bin, rbins = np.histogram(Q[count_pixels], bins=bins, range=x_range)
             # print(num_per_bin)
             # print(rbins)
 
@@ -400,19 +370,15 @@ class Data2DScattering(Data2D):
         data = data_chunk.ravel()
         pixel_list = np.where(mask_chunk.ravel() == 1)
         Q = q_chunk.ravel()
-<<<<<<< HEAD
         print(Q[pixel_list])
         min = np.min(Q[pixel_list])
         max = np.max(Q[pixel_list])
-        np.append(self.maxmin_array, min)
-        np.append(self.maxmin_array, max)
-        print('hello', self.maxmin_array)
+        #Data2DScattering.maxmin_array.append([min])
+        np.append(Data2DScattering.maxmin_array, min)
+        np.append(Data2DScattering.maxmin_array, max)
+        print('hello', Data2DScattering.maxmin_array)
 
         #q_dict = {}
-=======
-        np.append(self.maxmin_array, [np.min(Q[pixel_list]), np.max(Q[pixel_list])])
-        q_dict = {}
->>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
 
         #for p in pixel_list:
         #    q_dict['Q[p]'] += 1

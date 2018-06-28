@@ -28,13 +28,8 @@ class main_peak(Protocols.circular_average_q2I):
 
         # 1D curve
         #start = time.clock()
-<<<<<<< HEAD
         line = data.circular_average_q_bin_parallel(error=True)
         #line = data.circular_average_q_bin(error=True)
-=======
-        #line = data.circular_average_q_bin_parallel(error=True)
-        line = data.circular_average_q_bin(error=True)
->>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
         #print(time.clock() - start)
         #line.plot(show=True)
         new_results = self.analyze_q0(data, line, output_dir, **run_args)
