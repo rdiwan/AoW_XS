@@ -30,7 +30,11 @@ import pylab as plt
 import matplotlib as mpl
 #from scipy.optimize import leastsq
 #import scipy.special
+<<<<<<< HEAD
 #np.set_printoptions(threshold=np.nan)
+=======
+np.set_printoptions(threshold=np.nan)
+>>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
 import multiprocessing
 from joblib import Parallel, delayed
 from collections import Counter
@@ -67,7 +71,11 @@ class Data2DScattering(Data2D):
         self.detector_data = None # Detector-specific object
         self.data = None # 2D data
         self.measure_time = 0.0
+<<<<<<< HEAD
         self.maxmin_array = np.array([])
+=======
+        self.maxmin_array =  None
+>>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
         
         if name is not None:
             self.name = name
@@ -304,6 +312,10 @@ class Data2DScattering(Data2D):
 
     def circular_average_q_bin_parallel(self, bins_relative=1.0, error=False, **kwargs):
         num_cores = multiprocessing.cpu_count()
+<<<<<<< HEAD
+=======
+        self.maxmin_array = np.array(num_cores*2)
+>>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
 
         data = self.data.ravel()
 
@@ -312,19 +324,28 @@ class Data2DScattering(Data2D):
         qmap_split = np.array_split(self.calibration.q_map(), num_cores)
         dq = self.calibration.get_q_per_pixel()
 
+<<<<<<< HEAD
         count_pixels = Parallel(n_jobs=num_cores)(delayed(self.analyze)(data_chunk = data_split[i], mask_chunk = mask_split[i], q_chunk = qmap_split[i]) for i in range(len(data_split)))
 
         print('array', self.maxmin_array)
+=======
+        count_pixels = Parallel(n_jobs=num_cores)(delayed(self.analyze)(data_chunk = i, mask_chunk = j, q_chunk = q) for i in data_split for j in mask_split for q in qmap_split)
+
+>>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
         max = np.max(self.maxmin_array)
         min = np.min(self.maxmin_array)
         x_range = [min, max]
         bins = int(bins_relative * abs(max-min) / dq)
+<<<<<<< HEAD
         print(bins)
+=======
+>>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
         #combined_dicts = Counter({})
 
         #for dictionary in count_dict:
             #combined_dicts += dictionary
 
+<<<<<<< HEAD
         #pixel_list = []
 
        # for p_list in count_pixels:
@@ -333,6 +354,16 @@ class Data2DScattering(Data2D):
         Q = self.calibration.q_map().ravel()
 
         num_per_bin, rbins = np.histogram(Q[count_pixels[0]], bins=bins, range=x_range)
+=======
+        pixel_list = []
+
+        for p_list in count_pixels:
+            pixel_list += [p_list]
+
+        Q = self.calibration.q_map().ravel()
+
+        num_per_bin, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range)
+>>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
             # print(num_per_bin)
             # print(rbins)
 
@@ -369,6 +400,7 @@ class Data2DScattering(Data2D):
         data = data_chunk.ravel()
         pixel_list = np.where(mask_chunk.ravel() == 1)
         Q = q_chunk.ravel()
+<<<<<<< HEAD
         print(Q[pixel_list])
         min = np.min(Q[pixel_list])
         max = np.max(Q[pixel_list])
@@ -377,6 +409,10 @@ class Data2DScattering(Data2D):
         print('hello', self.maxmin_array)
 
         #q_dict = {}
+=======
+        np.append(self.maxmin_array, [np.min(Q[pixel_list]), np.max(Q[pixel_list])])
+        q_dict = {}
+>>>>>>> e48fa4e2ebcd702dc032921190d8e7fd6ede81fa
 
         #for p in pixel_list:
         #    q_dict['Q[p]'] += 1
