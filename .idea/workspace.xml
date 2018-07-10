@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c8baccc0-55a5-4349-af92-d0090eff684c" name="Default" comment="" />
+    <list default="true" id="c8baccc0-55a5-4349-af92-d0090eff684c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/results/AgBH_GISAXS_det5m_32.2s_x-19.000_y4.253_1.00s_15353_saxs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/results/AgBH_GISAXS_det5m_32.2s_x-19.000_y4.253_1.00s_15353_saxs.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,14 +14,14 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/XSAnalysis$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1529094239916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/XSAnalysis$runXS.coverage" NAME="runXS Coverage Results" MODIFIED="1531163616922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/XSAnalysis$runXS.coverage" NAME="runXS Coverage Results" MODIFIED="1531238149250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="XSAnalysis" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="runXS.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="runXS.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/runXS.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-3678">
@@ -30,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Data.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Data.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-232">
-              <caret line="331" column="12" selection-start-line="331" selection-start-column="12" selection-end-line="331" selection-end-column="12" />
+            <state relative-caret-position="195">
+              <caret line="252" column="9" selection-start-line="252" selection-start-column="9" selection-end-line="252" selection-end-column="9" />
               <folding>
                 <element signature="e#860#891#0" expanded="true" />
               </folding>
@@ -291,22 +294,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-32" y="23" width="1486" height="820" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="5" weight="0.32918397" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50123054" side_tool="true" weight="0.17134832" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="9" weight="0.32780084" />
-      <window_info active="true" anchor="bottom" x="97" y="669" width="840" height="116" id="Run" order="12" sideWeight="0.4987695" visible="true" weight="0.42323652" />
+      <window_info anchor="bottom" x="97" y="669" width="840" height="116" id="Run" order="12" sideWeight="0.4987695" visible="true" weight="0.42323652" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32918397" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49515906" visible="true" weight="0.065789476" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.16066483" />
+      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.16066483" />
       <window_info id="Structure" order="1" sideWeight="0.50484097" side_tool="true" weight="0.2624166" />
       <window_info id="Favorites" order="2" sideWeight="0.50484097" side_tool="true" weight="0.2624166" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.3988764" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.39834026" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -537,22 +539,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-232">
-          <caret line="331" column="12" selection-start-line="331" selection-start-column="12" selection-end-line="331" selection-end-column="12" />
-          <folding>
-            <element signature="e#860#891#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/runXS.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3678">
           <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
           <folding>
             <element signature="e#44#85#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="252" column="9" selection-start-line="252" selection-start-column="9" selection-end-line="252" selection-end-column="9" />
+          <folding>
+            <element signature="e#860#891#0" expanded="true" />
           </folding>
         </state>
       </provider>

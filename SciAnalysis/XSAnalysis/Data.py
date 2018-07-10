@@ -250,12 +250,12 @@ class Data2DScattering(Data2D):
 
         #lowest intensity and highest intensity
         x_range = [np.min(Q[pixel_list]), np.max(Q[pixel_list])]
-        print('bin range:', x_range)
+        #print('bin range:', x_range)
         #print(x_range)
 
         bins = int( bins_relative * abs(x_range[1]-x_range[0])/dq ) #averaging part
-        print('bin bins:', bins)
-        print('bin pixels', pixel_list)
+        #print('bin bins:', bins)
+        #print('bin pixels', pixel_list)
 
         num_per_bin, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range)
         #print(num_per_bin)

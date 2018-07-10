@@ -30,11 +30,11 @@ class main_peak(Protocols.circular_average_q2I):
         start = time.clock()
         line = data.circular_average_q_bin_parallel(error=False)
         print('parallel time', time.clock() - start)
-        line.plot(show=True)
+        #line.plot(show=True)
         start = time.clock()
         line = data.circular_average_q_bin(error=True)
         print('bin time', time.clock() - start)
-        line.plot(show=True)
+        #line.plot(show=True)
 
 
         #line.plot(show=True)
