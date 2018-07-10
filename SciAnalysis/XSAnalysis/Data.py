@@ -32,6 +32,7 @@ import matplotlib as mpl
 #import scipy.special
 #np.set_printoptions(threshold=np.nan)
 import multiprocessing
+from multiprocessing import Manager
 from joblib import Parallel, delayed
 from collections import Counter
 
@@ -67,6 +68,9 @@ class Data2DScattering(Data2D):
         self.detector_data = None # Detector-specific object
         self.data = None # 2D data
         self.measure_time = 0.0
+
+        manager = Manager()
+        self.maxmin_array = manager.list()
 
         if name is not None:
             self.name = name
@@ -246,10 +250,12 @@ class Data2DScattering(Data2D):
 
         #lowest intensity and highest intensity
         x_range = [np.min(Q[pixel_list]), np.max(Q[pixel_list])]
+        print('bin range:', x_range)
         #print(x_range)
 
         bins = int( bins_relative * abs(x_range[1]-x_range[0])/dq ) #averaging part
-        #print(bins)
+        print('bin bins:', bins)
+        print('bin pixels', pixel_list)
 
         num_per_bin, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range)
         #print(num_per_bin)
@@ -302,42 +308,30 @@ class Data2DScattering(Data2D):
         return line
 
     def circular_average_q_bin_parallel(self, bins_relative=1.0, error=False, **kwargs):
-        num_cores = multiprocessing.cpu_count()
+
+        #num_cores = multiprocessing.cpu_count()
+        num_cores = 1
+
+        if self.mask is None:
+            mask = np.ones(self.data.shape)
+        else:
+            mask = self.mask.data
 
         data = self.data.ravel()
-
-        data_split = np.array_split(self.data, num_cores)
-        mask_split = np.array_split(self.mask.data, num_cores)
-        qmap_split = np.array_split(self.calibration.q_map(), num_cores)
-        dq = self.calibration.get_q_per_pixel()
-
-        count_pixels = Parallel(n_jobs=num_cores)(delayed(self.analyze)(data_chunk = data_split[i], mask_chunk = mask_split[i], q_chunk = qmap_split[i]) for i in range(len(data_split)))
-
-        np.append(Data2DScattering.maxmin_array, "test")
-        print('array', Data2DScattering.maxmin_array)
-        
-        max = np.max(Data2DScattering.maxmin_array)
-        min = np.min(Data2DScattering.maxmin_array)
-        x_range = [min, max]
-        bins = int(bins_relative * abs(max-min) / dq)
-        print(bins)
-        #combined_dicts = Counter({})
-
-        #for dictionary in count_dict:
-            #combined_dicts += dictionary
-
-        #pixel_list = []
-
-       # for p_list in count_pixels:
-            #pixel_list += [p_list]
-
         Q = self.calibration.q_map().ravel()
 
-        num_per_bin, rbins = np.histogram(Q[count_pixels], bins=bins, range=x_range)
-            # print(num_per_bin)
-            # print(rbins)
+        count_pixels = Parallel(n_jobs=num_cores, backend="threading")(delayed(self.analyze)(mask_chunk = np.array_split(mask, num_cores)[i],
+                                                                        q_chunk = np.array_split(Q, num_cores)[i],
+                                                                        core = i) for i in range(num_cores))
 
-        idx = np.where(num_per_bin != 0)  # Bins that actually have data
+        x_range = [np.min(self.maxmin_array), np.max(self.maxmin_array)]
+        bins = int(bins_relative * abs(x_range[1]-x_range[0]) / self.calibration.get_q_per_pixel())
+
+        pixel_list = np.concatenate(count_pixels, axis = 1)
+
+        num_per_bin, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range)
+
+        idx = np.where(num_per_bin != 0)
 
         x_vals, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range, weights=Q[pixel_list])
         x_vals = x_vals[idx] / num_per_bin[idx]
@@ -345,47 +339,27 @@ class Data2DScattering(Data2D):
         I_vals = I_vals[idx] / num_per_bin[idx]
 
 
-        #num_per_bin, rbins = np.histogram(combined_dicts.keys(), bins=bins, range=x_range)
-        #idx = np.where(num_per_bin != 0)
-
-        #x_vals, rbins = np.histogram(combined_dicts.keys(), bins=bins, range=x_range, weights=combined_dicts.keys())
-        #x_vals = x_vals[idx] / num_per_bin[idx]
-
-        #PROBLEM
-        #I_vals, rbins = np.histogram(combined_dicts.keys(), bins=bins, range=x_range, weights=data[pixel_list])
-        #I_vals = I_vals[idx] / num_per_bin[idx]
 
         line = DataLine(x=x_vals, y=I_vals, x_label='q', y_label='I(q)', x_rlabel='$q \, (\AA^{-1})$',
                         y_rlabel=r'$I(q) \, (\mathrm{counts/pixel})$')
+
 
         return line
 
 
 
-    def analyze(self, data_chunk, mask_chunk, q_chunk):
+    def analyze(self, mask_chunk, q_chunk, core):
 
-        if mask_chunk is None:
-            mask_chunk = np.ones(data_chunk.shape)
-
-        data = data_chunk.ravel()
         pixel_list = np.where(mask_chunk.ravel() == 1)
+
+        offset = len(mask_chunk.ravel())
+
+        data_pixel_list = [x + (core * offset) for x in pixel_list]
         Q = q_chunk.ravel()
-        print(Q[pixel_list])
-        min = np.min(Q[pixel_list])
-        max = np.max(Q[pixel_list])
-        #Data2DScattering.maxmin_array.append([min])
-        np.append(Data2DScattering.maxmin_array, min)
-        np.append(Data2DScattering.maxmin_array, max)
-        print('hello', Data2DScattering.maxmin_array)
+        self.maxmin_array.append(np.min(Q[pixel_list]))
+        self.maxmin_array.append(np.max(Q[pixel_list]))
 
-        #q_dict = {}
-
-        #for p in pixel_list:
-        #    q_dict['Q[p]'] += 1
-
-        #return Counter(q_dict)
-
-        return pixel_list
+        return data_pixel_list
 
 
 

@@ -27,10 +27,16 @@ class main_peak(Protocols.circular_average_q2I):
         #data.plot(show=True)
 
         # 1D curve
-        #start = time.clock()
-        line = data.circular_average_q_bin_parallel(error=True)
-        #line = data.circular_average_q_bin(error=True)
-        #print(time.clock() - start)
+        start = time.clock()
+        line = data.circular_average_q_bin_parallel(error=False)
+        print('parallel time', time.clock() - start)
+        line.plot(show=True)
+        start = time.clock()
+        line = data.circular_average_q_bin(error=True)
+        print('bin time', time.clock() - start)
+        line.plot(show=True)
+
+
         #line.plot(show=True)
         new_results = self.analyze_q0(data, line, output_dir, **run_args)
         results.update(new_results)
@@ -378,7 +384,7 @@ if True:
 
     import glob
 
-    infiles = glob.glob(source_dir + 'Ag*.npy')
+    infiles = glob.glob(source_dir + 'Ag*53_saxs.npy')
     #infiles += glob.glob(source_dir + 'YT*.npy')
     #infiles = glob.glob(source_dir + '*.npy')
 
