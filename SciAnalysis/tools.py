@@ -145,8 +145,6 @@ class Processor(object):
             load_args={}, run_args={}, **kwargs):
         '''Process the specified files using the specified protocols.'''
 
-        print("Now I am here")
-
         l_args = self.load_args.copy()
         l_args.update(load_args)
         r_args = self.run_args.copy()
@@ -166,7 +164,6 @@ class Processor(object):
         for infile in infiles:
 
             try:
-                print('yep here')
                 data = self.load(infile, **l_args)
 
                 for protocol in protocols:

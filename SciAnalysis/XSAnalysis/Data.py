@@ -236,30 +236,20 @@ class Data2DScattering(Data2D):
         # This is not strictly necessary, but improves speed somewhat.
 
         data = self.data.ravel()
-        #print('data raveled', data)
         pixel_list = np.where(mask.ravel()==1) # Non-masked pixels
-        #print ('pixel list:', pixel_list)
 
         #2D map of the q-value associated with each pixel position in the detector image
         Q = self.calibration.q_map().ravel()
-        #print("printing Q:")
-        #print(Q)
 
         #delta-q associated with a single pixel
         dq = self.calibration.get_q_per_pixel()
 
         #lowest intensity and highest intensity
         x_range = [np.min(Q[pixel_list]), np.max(Q[pixel_list])]
-        #print('bin range:', x_range)
-        #print(x_range)
 
         bins = int( bins_relative * abs(x_range[1]-x_range[0])/dq ) #averaging part
-        #print('bin bins:', bins)
-        #print('bin pixels', pixel_list)
 
         num_per_bin, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range)
-        #print(num_per_bin)
-        #print(rbins)
 
         idx = np.where(num_per_bin!=0) # Bins that actually have data
 
@@ -309,8 +299,8 @@ class Data2DScattering(Data2D):
 
     def circular_average_q_bin_parallel(self, bins_relative=1.0, error=False, **kwargs):
 
-        #num_cores = multiprocessing.cpu_count()
-        num_cores = 1
+        num_cores = multiprocessing.cpu_count()
+        #num_cores = 4
 
         if self.mask is None:
             mask = np.ones(self.data.shape)
@@ -323,9 +313,11 @@ class Data2DScattering(Data2D):
         count_pixels = Parallel(n_jobs=num_cores, backend="threading")(delayed(self.analyze)(mask_chunk = np.array_split(mask, num_cores)[i],
                                                                         q_chunk = np.array_split(Q, num_cores)[i],
                                                                         core = i) for i in range(num_cores))
-
         x_range = [np.min(self.maxmin_array), np.max(self.maxmin_array)]
-        bins = int(bins_relative * abs(x_range[1]-x_range[0]) / self.calibration.get_q_per_pixel())
+
+        dq = self.calibration.get_q_per_pixel()
+
+        bins = int(bins_relative * abs(x_range[1]-x_range[0]) / dq)
 
         pixel_list = np.concatenate(count_pixels, axis = 1)
 
@@ -333,16 +325,49 @@ class Data2DScattering(Data2D):
 
         idx = np.where(num_per_bin != 0)
 
-        x_vals, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range, weights=Q[pixel_list])
-        x_vals = x_vals[idx] / num_per_bin[idx]
-        I_vals, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range, weights=data[pixel_list])
-        I_vals = I_vals[idx] / num_per_bin[idx]
+        if error:
+            # TODO: Include error calculations
+
+            x_vals, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range, weights=Q[pixel_list])
+
+            # Create array of the average values (mu), in the original array layout
+            locations = np.digitize(Q[pixel_list], bins=rbins,
+                                    right=True)  # Mark the bin IDs in the original array layout
+            mu = (x_vals / num_per_bin)[locations - 1]
+
+            weights = np.square(Q[pixel_list] - mu)
+
+            x_err, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range, weights=weights)
+            x_err = np.sqrt(x_err[idx] / num_per_bin[idx])
+            x_err[0] = dq / 2  # np.digitize includes all the values less than the minimum bin into the first element
+
+            x_vals = x_vals[idx] / num_per_bin[idx]
+
+            I_vals, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range, weights=data[pixel_list])
+            I_err_shot = np.sqrt(I_vals)[idx] / num_per_bin[idx]
+
+            mu = (I_vals / num_per_bin)[locations - 1]
+            weights = np.square(data[pixel_list] - mu)
+            I_err_std, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range, weights=weights)
+            I_err_std = np.sqrt(I_err_std[idx] / num_per_bin[idx])
+
+            y_err = np.sqrt(np.square(I_err_shot) + np.square(I_err_std))
+            I_vals = I_vals[idx] / num_per_bin[idx]
+
+            line = DataLine(x=x_vals, y=I_vals, x_err=x_err, y_err=y_err, x_label='q', y_label='I(q)',
+                            x_rlabel='$q \, (\AA^{-1})$', y_rlabel=r'$I(q) \, (\mathrm{counts/pixel})$')
+
+        else:
+
+            x_vals, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range, weights=Q[pixel_list])
+            x_vals = x_vals[idx] / num_per_bin[idx]
+            I_vals, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range, weights=data[pixel_list])
+            I_vals = I_vals[idx] / num_per_bin[idx]
 
 
 
-        line = DataLine(x=x_vals, y=I_vals, x_label='q', y_label='I(q)', x_rlabel='$q \, (\AA^{-1})$',
+            line = DataLine(x=x_vals, y=I_vals, x_label='q', y_label='I(q)', x_rlabel='$q \, (\AA^{-1})$',
                         y_rlabel=r'$I(q) \, (\mathrm{counts/pixel})$')
-
 
         return line
 

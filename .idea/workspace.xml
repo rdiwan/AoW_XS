@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8baccc0-55a5-4349-af92-d0090eff684c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SciAnalysis/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/SciAnalysis/tools.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis/results/AgBH_GISAXS_det5m_32.2s_x-19.000_y4.253_1.00s_15353_saxs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/results/AgBH_GISAXS_det5m_32.2s_x-19.000_y4.253_1.00s_15353_saxs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runXS.py" beforeDir="false" afterPath="$PROJECT_DIR$/runXS.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,7 +17,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/XSAnalysis$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1529094239916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/XSAnalysis$runXS.coverage" NAME="runXS Coverage Results" MODIFIED="1531238149250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/XSAnalysis$runXS.coverage" NAME="runXS Coverage Results" MODIFIED="1531336891980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="XSAnalysis" />
@@ -24,8 +27,8 @@
       <file leaf-file-name="runXS.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/runXS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3678">
-              <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+            <state relative-caret-position="227">
+              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
               <folding>
                 <element signature="e#44#85#0" expanded="true" />
               </folding>
@@ -33,41 +36,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="tools.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SciAnalysis/tools.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="106">
+              <caret line="469" column="19" selection-start-line="469" selection-start-column="14" selection-end-line="469" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Data.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="252" column="9" selection-start-line="252" selection-start-column="9" selection-end-line="252" selection-end-column="9" />
+            <state relative-caret-position="290">
+              <caret line="319" column="56" selection-start-line="319" selection-start-column="55" selection-end-line="319" selection-end-column="56" />
               <folding>
                 <element signature="e#860#891#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_base.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/joblib/externals/loky/_base.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="430" selection-start-line="430" selection-end-line="430" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_parallel_backends.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/joblib/_parallel_backends.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="514" selection-start-line="514" selection-end-line="514" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parallel.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/joblib/parallel.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="961" selection-start-line="961" selection-end-line="961" />
             </state>
           </provider>
         </entry>
@@ -97,7 +82,6 @@
       <find>class Calibration</find>
       <find>parallel</find>
       <find>circular_a</find>
-      <find>print</find>
       <find>circular_av</find>
       <find>circular</find>
       <find>data2d</find>
@@ -109,6 +93,10 @@
       <find>plot</find>
       <find>doing</find>
       <find>mask</find>
+      <find>Now I am here</find>
+      <find>yep here</find>
+      <find>I am here</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -131,10 +119,10 @@
         <option value="$PROJECT_DIR$/SciAnalysis/Data.py" />
         <option value="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Protocols_v2.py" />
         <option value="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Protocols.py" />
-        <option value="$PROJECT_DIR$/SciAnalysis/tools.py" />
         <option value="$PROJECT_DIR$/circularavgqbinscratch.py" />
-        <option value="$PROJECT_DIR$/runXS.py" />
+        <option value="$PROJECT_DIR$/SciAnalysis/tools.py" />
         <option value="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py" />
+        <option value="$PROJECT_DIR$/runXS.py" />
       </list>
     </option>
   </component>
@@ -148,8 +136,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-32" />
-    <option name="y" value="23" />
+    <option name="x" value="98" />
+    <option name="y" value="34" />
     <option name="width" value="1486" />
     <option name="height" value="820" />
   </component>
@@ -293,19 +281,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-32" y="23" width="1486" height="820" extended-state="0" />
+    <frame x="98" y="34" width="1486" height="820" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="5" weight="0.32918397" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50123054" side_tool="true" weight="0.17134832" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="9" weight="0.32780084" />
-      <window_info anchor="bottom" x="97" y="669" width="840" height="116" id="Run" order="12" sideWeight="0.4987695" visible="true" weight="0.42323652" />
+      <window_info active="true" anchor="bottom" x="97" y="669" width="840" height="116" id="Run" order="12" sideWeight="0.4987695" visible="true" weight="0.3360996" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32918397" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49515906" visible="true" weight="0.065789476" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.16066483" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.16066483" />
       <window_info id="Structure" order="1" sideWeight="0.50484097" side_tool="true" weight="0.2624166" />
       <window_info id="Favorites" order="2" sideWeight="0.50484097" side_tool="true" weight="0.2624166" />
       <window_info anchor="bottom" id="Debug" order="2" weight="0.39834026" />
@@ -511,10 +500,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SciAnalysis/tools.py">
+    <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/joblib/_parallel_backends.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5340">
-          <caret line="357" selection-start-line="357" selection-end-line="357" />
+        <state relative-caret-position="460">
+          <caret line="514" selection-start-line="514" selection-end-line="514" />
         </state>
       </provider>
     </entry>
@@ -525,13 +514,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/joblib/_parallel_backends.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="514" selection-start-line="514" selection-end-line="514" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/joblib/parallel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
@@ -539,10 +521,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SciAnalysis/tools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="469" column="19" selection-start-line="469" selection-start-column="14" selection-end-line="469" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/runXS.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3678">
-          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+        <state relative-caret-position="227">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
           <folding>
             <element signature="e#44#85#0" expanded="true" />
           </folding>
@@ -551,8 +540,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="252" column="9" selection-start-line="252" selection-start-column="9" selection-end-line="252" selection-end-column="9" />
+        <state relative-caret-position="290">
+          <caret line="319" column="56" selection-start-line="319" selection-start-column="55" selection-end-line="319" selection-end-column="56" />
           <folding>
             <element signature="e#860#891#0" expanded="true" />
           </folding>

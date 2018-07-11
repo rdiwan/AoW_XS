@@ -28,7 +28,7 @@ class main_peak(Protocols.circular_average_q2I):
 
         # 1D curve
         start = time.clock()
-        line = data.circular_average_q_bin_parallel(error=False)
+        line = data.circular_average_q_bin_parallel(error=True)
         print('parallel time', time.clock() - start)
         #line.plot(show=True)
         start = time.clock()
