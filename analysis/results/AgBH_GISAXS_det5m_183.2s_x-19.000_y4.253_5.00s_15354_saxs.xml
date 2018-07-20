@@ -454,4 +454,30 @@
     <result error="0.15837317228042858" name="peak0_ori2_angle" symbol="chi0" symbol_latex="\chi_0" unit_type="angle" units="degrees" units_latex="^{\circ}" value="89.99999996209624"/>
     <result error="3.181932341136389" name="peak0_ori2_prefactor" symbol="c" symbol_latex="c" unit_type="a.u." units="a.u." units_latex="a.u." value="90.4934682409713"/>
   </protocol>
+  <protocol end_timestamp="1532101860.384632" infile="/Users/renuka_diwan/PycharmProjects/XSAnalysis/AgBH_GISAXS_det5m_183.2s_x-19.000_y4.253_5.00s_15354_saxs.npy" name="main_peak" outfile="/Users/renuka_diwan/PycharmProjects/XSAnalysis/analysis/results/AgBH_GISAXS_det5m_183.2s_x-19.000_y4.253_5.00s_15354_saxs.xml" output_dir="/Users/renuka_diwan/PycharmProjects/XSAnalysis/analysis/results" runtime="2.5542352199554443" save_timestamp="1532101860.399113" start_timestamp="1532101857.830397">
+    <result error="0.030281764404467643" name="q0" symbol="q0" symbol_latex="q_0" unit_type="inverse distance" units="A^-1" units_latex="\mathrm{ \AA }^{-1}" value="0.01042130512428263"/>
+    <result error="175.19302888414705" name="d0" symbol="d0" symbol_latex="d_0" unit_type="distance" units="nm" units_latex="\mathrm{nm}" value="60.29173152736089"/>
+    <result error="0.20197083551125558" name="sigma_q0" symbol="sigma_q" symbol_latex="\sigma_q" unit_type="inverse distance" units="A^-1" units_latex="\mathrm{ \AA }^{-1}" value="0.01410977791258805"/>
+    <result error="254.2952454070521" name="xi_q0" symbol="xi" symbol_latex="\xi" unit_type="distance" units="nm" units_latex="\mathrm{ nm }" value="17.765185888536983"/>
+    <result error="21919.132945064543" name="peak0_prefactor" symbol="c" symbol_latex="c" unit_type="a.u." units="a.u." units_latex="a.u." value="792.0040861917244"/>
+    <result error="115475.09495530932" name="peak0_background_m" symbol="m" symbol_latex="m" unit_type="slope" units="a.u./(A^-1)" units_latex="a.u./\mathrm{ \AA }^{-1}" value="168.91517754536642"/>
+    <result error="21071.253866319934" name="peak0_background_b" symbol="b" symbol_latex="b" unit_type="a.u." units="a.u." units_latex="a.u." value="-663.1781651953609"/>
+    <result name="peak0_chi_squared" value="872.1120546838152"/>
+    <result error="0.01465060954393731" name="peak0_ori2_eta" symbol="eta" symbol_latex="\eta" unit_type="unitless" units="" units_latex="" value="0.6910131794176575"/>
+    <result error="0.15837317228042858" name="peak0_ori2_angle" symbol="chi0" symbol_latex="\chi_0" unit_type="angle" units="degrees" units_latex="^{\circ}" value="89.99999996209624"/>
+    <result error="3.181932341136389" name="peak0_ori2_prefactor" symbol="c" symbol_latex="c" unit_type="a.u." units="a.u." units_latex="a.u." value="90.4934682409713"/>
+  </protocol>
+  <protocol end_timestamp="1532102285.584255" infile="/Users/renuka_diwan/PycharmProjects/XSAnalysis/AgBH_GISAXS_det5m_183.2s_x-19.000_y4.253_5.00s_15354_saxs.npy" name="main_peak" outfile="/Users/renuka_diwan/PycharmProjects/XSAnalysis/analysis/results/AgBH_GISAXS_det5m_183.2s_x-19.000_y4.253_5.00s_15354_saxs.xml" output_dir="/Users/renuka_diwan/PycharmProjects/XSAnalysis/analysis/results" runtime="3.129349946975708" save_timestamp="1532102285.5963688" start_timestamp="1532102282.454905">
+    <result error="0.030281764404467643" name="q0" symbol="q0" symbol_latex="q_0" unit_type="inverse distance" units="A^-1" units_latex="\mathrm{ \AA }^{-1}" value="0.01042130512428263"/>
+    <result error="175.19302888414705" name="d0" symbol="d0" symbol_latex="d_0" unit_type="distance" units="nm" units_latex="\mathrm{nm}" value="60.29173152736089"/>
+    <result error="0.20197083551125558" name="sigma_q0" symbol="sigma_q" symbol_latex="\sigma_q" unit_type="inverse distance" units="A^-1" units_latex="\mathrm{ \AA }^{-1}" value="0.01410977791258805"/>
+    <result error="254.2952454070521" name="xi_q0" symbol="xi" symbol_latex="\xi" unit_type="distance" units="nm" units_latex="\mathrm{ nm }" value="17.765185888536983"/>
+    <result error="21919.132945064543" name="peak0_prefactor" symbol="c" symbol_latex="c" unit_type="a.u." units="a.u." units_latex="a.u." value="792.0040861917244"/>
+    <result error="115475.09495530932" name="peak0_background_m" symbol="m" symbol_latex="m" unit_type="slope" units="a.u./(A^-1)" units_latex="a.u./\mathrm{ \AA }^{-1}" value="168.91517754536642"/>
+    <result error="21071.253866319934" name="peak0_background_b" symbol="b" symbol_latex="b" unit_type="a.u." units="a.u." units_latex="a.u." value="-663.1781651953609"/>
+    <result name="peak0_chi_squared" value="872.1120546838152"/>
+    <result error="0.01465060954393731" name="peak0_ori2_eta" symbol="eta" symbol_latex="\eta" unit_type="unitless" units="" units_latex="" value="0.6910131794176575"/>
+    <result error="0.15837317228042858" name="peak0_ori2_angle" symbol="chi0" symbol_latex="\chi_0" unit_type="angle" units="degrees" units_latex="^{\circ}" value="89.99999996209624"/>
+    <result error="3.181932341136389" name="peak0_ori2_prefactor" symbol="c" symbol_latex="c" unit_type="a.u." units="a.u." units_latex="a.u." value="90.4934682409713"/>
+  </protocol>
 </DataFile>

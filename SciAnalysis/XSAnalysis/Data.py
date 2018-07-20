@@ -33,6 +33,7 @@ import matplotlib as mpl
 #np.set_printoptions(threshold=np.nan)
 import multiprocessing
 from multiprocessing import Manager
+from multiprocessing import Pool
 from joblib import Parallel, delayed
 from collections import Counter
 
@@ -225,7 +226,7 @@ class Data2DScattering(Data2D):
         # arbitrary about the number of bins to be used (doesn't have to match
         # the q-spacing).
 
-        #start = time.clock()
+        start = time.clock()
 
         if self.mask is None:
             mask = np.ones(self.data.shape)
@@ -236,6 +237,7 @@ class Data2DScattering(Data2D):
         # This is not strictly necessary, but improves speed somewhat.
 
         data = self.data.ravel()
+
         pixel_list = np.where(mask.ravel()==1) # Non-masked pixels
 
         #2D map of the q-value associated with each pixel position in the detector image
@@ -252,6 +254,8 @@ class Data2DScattering(Data2D):
         num_per_bin, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range)
 
         idx = np.where(num_per_bin!=0) # Bins that actually have data
+
+        print('bin part 1 time', time.clock() - start)
 
 
         if error:
@@ -293,14 +297,15 @@ class Data2DScattering(Data2D):
 
             line = DataLine( x=x_vals, y=I_vals, x_label='q', y_label='I(q)', x_rlabel='$q \, (\AA^{-1})$', y_rlabel=r'$I(q) \, (\mathrm{counts/pixel})$' )
 
-        #print(time.clock() - start)
-        #line.plot(show=True)
+        print('bin time', time.clock() - start)
         return line
 
-    def circular_average_q_bin_parallel(self, bins_relative=1.0, error=False, **kwargs):
+    def circular_average_q_bin_parallel_trial1(self, bins_relative=1.0, error=False, **kwargs):
+
+        start = time.clock()
 
         num_cores = multiprocessing.cpu_count()
-        #num_cores = 4
+        # num_cores = 4
 
         if self.mask is None:
             mask = np.ones(self.data.shape)
@@ -310,20 +315,25 @@ class Data2DScattering(Data2D):
         data = self.data.ravel()
         Q = self.calibration.q_map().ravel()
 
-        count_pixels = Parallel(n_jobs=num_cores, backend="threading")(delayed(self.analyze)(mask_chunk = np.array_split(mask, num_cores)[i],
-                                                                        q_chunk = np.array_split(Q, num_cores)[i],
-                                                                        core = i) for i in range(num_cores))
+
+        self.mask_split = np.array_split(mask, num_cores)
+        self.q_split = np.array_split(Q, num_cores)
+
+
+        count_pixels = Parallel(n_jobs=num_cores, backend='threading')(
+            delayed(self.analyze)(core=i) for i in range(num_cores))
+
+        pixel_list = np.concatenate(count_pixels, axis=1)
+
         x_range = [np.min(self.maxmin_array), np.max(self.maxmin_array)]
 
         dq = self.calibration.get_q_per_pixel()
-
-        bins = int(bins_relative * abs(x_range[1]-x_range[0]) / dq)
-
-        pixel_list = np.concatenate(count_pixels, axis = 1)
+        bins = int(bins_relative * abs(x_range[1] - x_range[0]) / dq)
 
         num_per_bin, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range)
-
         idx = np.where(num_per_bin != 0)
+
+        print('parallel part 1 time', time.clock() - start)
 
         if error:
             # TODO: Include error calculations
@@ -364,16 +374,16 @@ class Data2DScattering(Data2D):
             I_vals, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range, weights=data[pixel_list])
             I_vals = I_vals[idx] / num_per_bin[idx]
 
-
-
             line = DataLine(x=x_vals, y=I_vals, x_label='q', y_label='I(q)', x_rlabel='$q \, (\AA^{-1})$',
-                        y_rlabel=r'$I(q) \, (\mathrm{counts/pixel})$')
+                            y_rlabel=r'$I(q) \, (\mathrm{counts/pixel})$')
 
+        print('parallel time', time.clock() - start)
         return line
 
+    def analyze(self, core):
 
-
-    def analyze(self, mask_chunk, q_chunk, core):
+        mask_chunk = self.mask_split[core]
+        q_chunk = self.q_split[core]
 
         pixel_list = np.where(mask_chunk.ravel() == 1)
 
@@ -385,10 +395,6 @@ class Data2DScattering(Data2D):
         self.maxmin_array.append(np.max(Q[pixel_list]))
 
         return data_pixel_list
-
-
-
-
 
 
     def linecut_angle(self, q0, dq, x_label='angle', x_rlabel='$\chi \, (^{\circ})$', y_label='I', y_rlabel=r'$I (\chi) \, (\mathrm{counts/pixel})$', **kwargs):

@@ -4,8 +4,9 @@
     <list default="true" id="c8baccc0-55a5-4349-af92-d0090eff684c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py" beforeDir="false" afterPath="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SciAnalysis/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/SciAnalysis/tools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/results/AgBH_GISAXS_det5m_183.2s_x-19.000_y4.253_5.00s_15354_saxs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/results/AgBH_GISAXS_det5m_183.2s_x-19.000_y4.253_5.00s_15354_saxs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis/results/AgBH_GISAXS_det5m_32.2s_x-19.000_y4.253_1.00s_15353_saxs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/results/AgBH_GISAXS_det5m_32.2s_x-19.000_y4.253_1.00s_15353_saxs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/circularavgqbinscratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/circularavgqbinscratch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/runXS.py" beforeDir="false" afterPath="$PROJECT_DIR$/runXS.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,18 +18,18 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/XSAnalysis$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1529094239916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/XSAnalysis$runXS.coverage" NAME="runXS Coverage Results" MODIFIED="1531336891980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/XSAnalysis$runXS.coverage" NAME="runXS Coverage Results" MODIFIED="1532102408318" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="XSAnalysis" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="runXS.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="runXS.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/runXS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+            <state relative-caret-position="170">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
               <folding>
                 <element signature="e#44#85#0" expanded="true" />
               </folding>
@@ -36,23 +37,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tools.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SciAnalysis/tools.py">
+      <file leaf-file-name="_methods.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/numpy/core/_methods.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="469" column="19" selection-start-line="469" selection-start-column="14" selection-end-line="469" selection-end-column="19" />
+            <state relative-caret-position="129">
+              <caret line="28" selection-start-line="28" selection-end-line="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Data.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="tools.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SciAnalysis/tools.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-562">
+              <caret line="143" column="8" selection-start-line="143" selection-start-column="8" selection-end-line="143" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Data.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="319" column="56" selection-start-line="319" selection-start-column="55" selection-end-line="319" selection-end-column="56" />
+            <state relative-caret-position="999">
+              <caret line="303" selection-start-line="303" selection-end-line="303" />
               <folding>
                 <element signature="e#860#891#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="circularavgqbinscratch.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/circularavgqbinscratch.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="272" column="101" selection-start-line="272" selection-start-column="101" selection-end-line="272" selection-end-column="101" />
             </state>
           </provider>
         </entry>
@@ -86,17 +105,18 @@
       <find>circular</find>
       <find>data2d</find>
       <find>circu</find>
-      <find>q_map</find>
       <find>class</find>
       <find>linecut</find>
       <find>stats</find>
       <find>plot</find>
       <find>doing</find>
-      <find>mask</find>
       <find>Now I am here</find>
       <find>yep here</find>
       <find>I am here</find>
       <find>print</find>
+      <find>q_map</find>
+      <find>apply</find>
+      <find>mask</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -119,10 +139,10 @@
         <option value="$PROJECT_DIR$/SciAnalysis/Data.py" />
         <option value="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Protocols_v2.py" />
         <option value="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Protocols.py" />
-        <option value="$PROJECT_DIR$/circularavgqbinscratch.py" />
         <option value="$PROJECT_DIR$/SciAnalysis/tools.py" />
-        <option value="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py" />
+        <option value="$PROJECT_DIR$/circularavgqbinscratch.py" />
         <option value="$PROJECT_DIR$/runXS.py" />
+        <option value="$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py" />
       </list>
     </option>
   </component>
@@ -135,10 +155,10 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="98" />
-    <option name="y" value="34" />
-    <option name="width" value="1486" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="1" />
+    <option name="y" value="23" />
+    <option name="width" value="1334" />
     <option name="height" value="820" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -271,7 +291,7 @@
     </task>
     <servers />
   </component>
-  <component name="TodoView">
+  <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -281,23 +301,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="98" y="34" width="1486" height="820" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="5" weight="0.32918397" />
-      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50123054" side_tool="true" weight="0.17134832" />
+      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.501548" side_tool="true" weight="0.39834026" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32918397" />
       <window_info anchor="bottom" id="Python Console" order="9" weight="0.32780084" />
-      <window_info active="true" anchor="bottom" x="97" y="669" width="840" height="116" id="Run" order="12" sideWeight="0.4987695" visible="true" weight="0.3360996" />
+      <window_info anchor="bottom" x="97" y="669" width="840" height="116" id="Run" order="12" sideWeight="0.4987695" visible="true" weight="0.33454546" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32918397" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49515906" visible="true" weight="0.065789476" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49515906" visible="true" weight="0.1795422" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.16066483" />
+      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.102288984" />
       <window_info id="Structure" order="1" sideWeight="0.50484097" side_tool="true" weight="0.2624166" />
       <window_info id="Favorites" order="2" sideWeight="0.50484097" side_tool="true" weight="0.2624166" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.39834026" />
+      <window_info anchor="bottom" id="Debug" order="2" sideWeight="0.498452" weight="0.84606063" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -307,27 +326,27 @@
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49515906" visible="true" weight="0.19427244" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" x="97" y="669" width="840" height="116" id="Run" order="12" sideWeight="0.4992636" visible="true" weight="0.17134832" />
-      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
-      <window_info id="Favorites" order="2" sideWeight="0.50484097" side_tool="true" weight="0.2624166" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49515906" visible="true" weight="0.29930928" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32918397" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.32972136" />
       <window_info id="Structure" order="1" sideWeight="0.50484097" side_tool="true" weight="0.2624166" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.32918397" />
-      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.3988764" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32918397" />
-      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50073636" side_tool="true" weight="0.32780084" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.0" />
+      <window_info active="true" anchor="bottom" x="97" y="669" width="840" height="116" id="Run" order="12" sideWeight="0.4987695" visible="true" weight="0.373444" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
       <window_info anchor="bottom" id="Python Console" order="9" weight="0.32780084" />
+      <window_info anchor="bottom" id="Debug" order="2" sideWeight="0.498452" weight="0.39834026" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32918397" />
+      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.501548" side_tool="true" weight="0.39834026" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="2" sideWeight="0.50484097" side_tool="true" weight="0.2624166" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,19 +360,21 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/circularavgqbinscratch.py</url>
-          <line>40</line>
+          <line>190</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="9" />
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="10" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/analysis/results/x079y058i12be.xml" />
-    <entry file="file://$PROJECT_DIR$/analysis/results/x079y057i12bd.xml" />
-    <entry file="file://$PROJECT_DIR$/mask.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/analysis/results/x079y056i12bc.xml" />
     <entry file="file://$PROJECT_DIR$/analysis/main_peak/x079y056i12bc_ori.dat" />
     <entry file="file://$PROJECT_DIR$/analysis/main_peak/x079y056i12bc_qnI.dat" />
@@ -426,16 +447,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/circularavgqbinscratch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="2" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/numpy/lib/shape_base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -467,20 +478,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/numpy/core/fromnumeric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34620">
-          <caret line="2319" selection-start-line="2319" selection-end-line="2319" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/numpy/core/_methods.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/analysis/main_peak/AgBH_GISAXS_det5m_32.2s_x-19.000_y4.253_1.00s_15353_saxs_ori.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -494,9 +491,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="434">
           <caret line="41" selection-start-line="41" selection-end-line="41" />
-          <folding>
-            <element signature="e#44#85#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -521,29 +515,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SciAnalysis/tools.py">
+    <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/joblib/pool.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/joblib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file:///anaconda3/lib/python3.6/multiprocessing/pool.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="469" column="19" selection-start-line="469" selection-start-column="14" selection-end-line="469" selection-end-column="19" />
+        <state relative-caret-position="-173">
+          <caret line="348" column="8" selection-start-line="348" selection-start-column="8" selection-end-line="348" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/runXS.py">
+    <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/numpy/core/fromnumeric.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="e#44#85#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="129">
+          <caret line="2419" selection-start-line="2419" selection-end-line="2419" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../untitled/venv/lib/python3.6/site-packages/numpy/core/_methods.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/circularavgqbinscratch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="272" column="101" selection-start-line="272" selection-start-column="101" selection-end-line="272" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SciAnalysis/tools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-562">
+          <caret line="143" column="8" selection-start-line="143" selection-start-column="8" selection-end-line="143" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SciAnalysis/XSAnalysis/Data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="319" column="56" selection-start-line="319" selection-start-column="55" selection-end-line="319" selection-end-column="56" />
+        <state relative-caret-position="999">
+          <caret line="303" selection-start-line="303" selection-end-line="303" />
           <folding>
             <element signature="e#860#891#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runXS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <element signature="e#44#85#0" expanded="true" />
           </folding>
         </state>
       </provider>
