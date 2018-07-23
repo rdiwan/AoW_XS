@@ -3,6 +3,7 @@
 
 from SciAnalysis.XSAnalysis.Data import *
 from SciAnalysis.XSAnalysis import Protocols
+from joblib import Parallel, delayed
 
 
 class main_peak(Protocols.circular_average_q2I):
@@ -18,6 +19,16 @@ class main_peak(Protocols.circular_average_q2I):
         self.run_args.update(kwargs)
 
     @Protocols.run_default
+    def run_mini(self, data, output_dir, **run_args):
+        data.dezinger(tol = 1e5)
+        line = data.circular_average_q_bin(error=True)
+        #line.plot(show=True)
+
+
+        return {}
+
+
+    @Protocols.run_default
     def run(self, data, output_dir, **run_args):
 
         results = {}
@@ -27,12 +38,13 @@ class main_peak(Protocols.circular_average_q2I):
         #data.plot(show=True)
 
         # 1D curve
-        line = data.circular_average_q_bin(error=True)
-        line.plot(show=True)
-        line = data.circular_average_q_bin_parallel_trial1(error=True)
-        line.plot(show=True)
 
-        #line.plot(show=True)
+        line = data.circular_average_q_bin(error=True)
+
+        #line = data.circular_average_q_bin_half(error=True)
+        #line = data.circular_average_q_bin_parallel_trial1(error=True)
+        #line = data.circular_average_q_bin_parallel_trial2(error=True)
+
         new_results = self.analyze_q0(data, line, output_dir, **run_args)
         results.update(new_results)
 
@@ -379,8 +391,10 @@ if True:
 
     import glob
 
-    #infiles = glob.glob(source_dir + 'Ag*53_saxs.npy')
-    infiles = glob.glob(source_dir + 'YT*.npy')
+
+    infiles = glob.glob(source_dir + 'Ag*.npy')
+    infiles += glob.glob(source_dir + 'YT*.npy')
+
     #infiles = glob.glob(source_dir + '*.npy')
 
     print(infiles)
@@ -407,6 +421,16 @@ if True:
 
     protocols = [main_peak()]
 
+    startreg = time.clock()
+
     process.run(infiles, protocols, output_dir=output_dir, force=True)
 
+    print('Reg time', time.clock() - startreg)
+    startpar = time.clock()
+
+    Parallel(n_jobs=4, backend='threading')(delayed(process.run)(infiles=[infile], protocols=protocols, output_dir=output_dir, force=True) for infile in infiles)
+
+    print('Parallel time', time.clock() - startpar)
+
+    print('Whole time', time.clock() - startreg)
     print("Note: Reached the end of runXS.py")

@@ -23,6 +23,7 @@
 
 import os
 import time
+from joblib import Parallel, delayed
 
 SUPPRESS_EXCEPTIONS = False  # Set to 'True' to suppress Python exceptions (errors). This allows the script to keep running even if there is an error processing one particular file.
 USE_LXML = True  # Set to 'False' if lxml is not installed
@@ -177,7 +178,9 @@ class Processor(object):
                     else:
                         print('Running {} for {}'.format(protocol.name, data.name))
 
+                        start = time.clock()
                         results = protocol.run(data, output_dir_current, **r_args)
+                        print('internal run time', time.clock() - start)
 
                         md = {}
                         md['infile'] = data.infile
@@ -192,6 +195,64 @@ class Processor(object):
                     print('  ERROR ({}) with file {}.'.format(exception.__class__.__name__, infile))
                 else:
                     raise
+
+
+    def run_parallel(self, infiles=None, protocols=None, output_dir=None, force=False, ignore_errors=False, sort=False,
+            load_args={}, run_args={}, **kwargs):
+        '''Process the specified files using the specified protocols.'''
+
+        l_args = self.load_args.copy()
+        l_args.update(load_args)
+        r_args = self.run_args.copy()
+        r_args.update(run_args)
+
+        if infiles is None:
+            infiles = self.infiles
+        if sort:
+            infiles.sort()
+
+        if protocols is None:
+            protocols = self.protocols
+
+        if output_dir is None:
+            output_dir = self.output_dir
+
+        Parallel(n_jobs=2, backend='threading')(delayed(self.try_parallel)(infile = i, l_args = l_args, r_args = r_args, protocols = protocols, output_dir = output_dir) for i in infiles)
+
+
+    def try_parallel(self, infile, l_args, r_args, protocols, output_dir):
+
+        try:
+            data = self.load(infile, **l_args)
+
+            for protocol in protocols:
+
+                output_dir_current = self.access_dir(output_dir, protocol.name)
+
+                if not False and protocol.output_exists(data.name, output_dir_current):
+                    # Data already exists
+                    print('Skipping {} for {}'.format(protocol.name, data.name))
+
+                else:
+                    print('Running {} for {}'.format(protocol.name, data.name))
+
+                    start = time.clock()
+                    results = protocol.run_mini(data, output_dir_current, **r_args)
+
+
+                    md = {}
+                    md['infile'] = data.infile
+                    if 'full_name' in l_args:
+                        md['full_name'] = l_args['full_name']
+                    self.store_results(results, output_dir, infile, protocol, **md)
+
+        except Exception as exception:
+            if SUPPRESS_EXCEPTIONS:
+                # Ignore errors, so that execution doesn't get stuck on a single bad file
+                print('  ERROR ({}) with file {}.'.format(exception.__class__.__name__, infile))
+            else:
+                raise
+
 
     def load(self, infile, **kwargs):
 

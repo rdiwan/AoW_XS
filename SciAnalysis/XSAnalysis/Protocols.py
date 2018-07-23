@@ -29,8 +29,6 @@ class ProcessorXS(Processor):
 
     def load(self, infile, **kwargs):
 
-
-        print("I am here")
         data = Data2DScattering(infile, **kwargs)
         data.infile = infile
 

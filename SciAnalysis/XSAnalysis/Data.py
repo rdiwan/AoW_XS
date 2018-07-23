@@ -204,8 +204,6 @@ class Data2DScattering(Data2D):
             self.mask.data[idx] = 0
 
 
-
-
     def circular_average_q_bin(self, bins_relative=1.0, error=False, **kwargs):
         '''Returns a 1D curve that is a circular average of the 2D data. The
         data is average over 'chi', so that the resulting curve is as a function
@@ -255,7 +253,7 @@ class Data2DScattering(Data2D):
 
         idx = np.where(num_per_bin!=0) # Bins that actually have data
 
-        print('bin part 1 time', time.clock() - start)
+        #print('bin part 1', time.clock() - start)
 
 
         if error:
@@ -297,8 +295,10 @@ class Data2DScattering(Data2D):
 
             line = DataLine( x=x_vals, y=I_vals, x_label='q', y_label='I(q)', x_rlabel='$q \, (\AA^{-1})$', y_rlabel=r'$I(q) \, (\mathrm{counts/pixel})$' )
 
-        print('bin time', time.clock() - start)
+        #print('bin time', time.clock() - start)
+
         return line
+
 
     def circular_average_q_bin_parallel_trial1(self, bins_relative=1.0, error=False, **kwargs):
 
@@ -314,7 +314,6 @@ class Data2DScattering(Data2D):
 
         data = self.data.ravel()
         Q = self.calibration.q_map().ravel()
-
 
         self.mask_split = np.array_split(mask, num_cores)
         self.q_split = np.array_split(Q, num_cores)
@@ -333,7 +332,7 @@ class Data2DScattering(Data2D):
         num_per_bin, rbins = np.histogram(Q[pixel_list], bins=bins, range=x_range)
         idx = np.where(num_per_bin != 0)
 
-        print('parallel part 1 time', time.clock() - start)
+        print(time.clock() - start)
 
         if error:
             # TODO: Include error calculations
@@ -377,17 +376,17 @@ class Data2DScattering(Data2D):
             line = DataLine(x=x_vals, y=I_vals, x_label='q', y_label='I(q)', x_rlabel='$q \, (\AA^{-1})$',
                             y_rlabel=r'$I(q) \, (\mathrm{counts/pixel})$')
 
-        print('parallel time', time.clock() - start)
+        print(time.clock() - start)
         return line
 
     def analyze(self, core):
 
-        mask_chunk = self.mask_split[core]
+        mask_chunk = self.mask_split[core].ravel()
         q_chunk = self.q_split[core]
 
-        pixel_list = np.where(mask_chunk.ravel() == 1)
+        pixel_list = np.where(mask_chunk == 1)
 
-        offset = len(mask_chunk.ravel())
+        offset = len(mask_chunk)
 
         data_pixel_list = [x + (core * offset) for x in pixel_list]
         Q = q_chunk.ravel()
@@ -395,6 +394,7 @@ class Data2DScattering(Data2D):
         self.maxmin_array.append(np.max(Q[pixel_list]))
 
         return data_pixel_list
+
 
 
     def linecut_angle(self, q0, dq, x_label='angle', x_rlabel='$\chi \, (^{\circ})$', y_label='I', y_rlabel=r'$I (\chi) \, (\mathrm{counts/pixel})$', **kwargs):
